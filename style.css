@@ -1,0 +1,124 @@
+/* 页面整体样式 */
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #f9f9f9; /* 更亮的背景色 */
+    color: #333;
+    box-sizing: border-box; /* 设置盒模型为边框盒 */
+}
+
+/* 容器样式 */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* 标题和搜索框 */
+header {
+    text-align: center;
+    margin-bottom: 30px; /* 更大的底部间距 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;    
+}
+
+header h1 {
+    font-size: 2.5em;
+    color: #ff414d;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px; /* 图标与文字之间的间距 */
+}
+
+header h1 img {
+    width: 60px;
+    height: 60px;
+}
+
+header input {
+    width: 80%;
+    max-width: 400px;
+    padding: 10px;
+    font-size: 1em;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+header input:focus {
+    border-color: #ff414d;
+    box-shadow: 0 0 5px rgba(255, 65, 77, 0.5);
+}
+
+/* 宝可梦容器 */
+.pokemon-container {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr); /* 每行显示7列 */
+    gap: 20px; /* 设置卡片之间的间距 */
+    justify-items: center; /* 水平居中对齐每个卡片 */
+    padding: 20px; /* 为容器添加内边距 */
+}
+
+/* 宝可梦卡片 */
+.pokemon-card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    padding: 20px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+    width: auto; /* 固定宽度，确保卡片宽度适合网格布局 */
+}
+
+.pokemon-card:hover {
+    transform: translateY(-5px);
+}
+
+.pokemon-card img {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: 2px solid #f5f5f5;
+    border-radius: 50%;
+    transition: border-color 0.3s;
+}
+
+.pokemon-card img:hover {
+    border-color: #ff414d;
+}
+
+.pokemon-card h3 {
+    font-size: 1.2em;
+    margin: 5px 0;
+    color: #555;
+}
+
+.pokemon-card p {
+    font-size: 14px;
+    color: #777;
+}
+
+/* 响应式调整 */
+@media (max-width: 1024px) {
+    .pokemon-container {
+        grid-template-columns: repeat(5, 1fr); /* 屏幕较小，调整为5列 */
+    }
+}
+
+@media (max-width: 768px) {
+    .pokemon-container {
+        grid-template-columns: repeat(4, 1fr); /* 更小屏幕，调整为4列 */
+    }
+}
+
+@media (max-width: 480px) {
+    .pokemon-container {
+        grid-template-columns: repeat(3, 1fr); /* 极小屏幕，调整为3列 */
+    }
+}

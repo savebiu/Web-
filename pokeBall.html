@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>精灵球</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* 页面样式 */
+        body {
+            background-image: url('myImages/6.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            height: 100vh; /* 确保页面高度填满视窗 */
+            overflow-y: auto; /* 允许页面上下滚动 */
+        }
+
+        .content {
+            position: relative;
+            z-index: 1;
+            padding: 20px;
+            min-height: 100%; /* 确保内容区填满页面 */
+        }
+
+        h1 {
+            color: white;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* 按钮容器样式 */
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .button {
+            font-size: 20px;
+            padding: 10px 20px;
+            background-color: #FF7E79;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            background-color: #FFB6C1;
+        }
+
+        /* 精灵球图片容器样式 */
+        .pokeball-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);  /* 创建3列 */
+            gap: 30px;  /* 图片之间的间距 */
+            margin-top: 30px;
+            justify-items: center;
+        }
+
+        /* 精灵球图片样式 */
+        .pokeball-card {
+            position: relative;  /* 使描述框定位于图片上 */
+            width: 150px;
+            height: 150px;
+        }
+
+        .pokeball-container img {
+            width: 100%;  /* 使图片填满卡片 */
+            height: 100%;  /* 使图片填满卡片 */
+            object-fit: cover;  /* 保持图片比例，填充 */
+            border-radius: 50%;  /* 圆形 */
+            transition: transform 0.3s ease-in-out;  /* 添加动画效果 */
+        }
+
+        .pokeball-container img:hover {
+            transform: scale(1.1);  /* 鼠标悬停时放大图片 */
+        }
+
+        /* 介绍框样式 */
+        .pokeball-description {
+            display: none;  /* 默认不显示介绍框 */
+            position: absolute;
+            bottom: -50px;  /* 放置在图片下方 */
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            width: 220px;
+            text-align: center;
+            font-size: 20px;  /* 调大字体大小 */
+            z-index: 2;  /* 设置较高的层级，确保它显示在图片上方 */
+        }
+
+        /* 显示介绍框 */
+        .pokeball-card:hover .pokeball-description {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <h1>欢迎来到精灵球页面！</h1>
+
+        <!-- 按钮容器，点击按钮弹出提示 -->
+        <div class="button-container">
+            <button class="button" onclick="showPokeballs()">点击查看精灵球</button>
+        </div>
+
+        <!-- 精灵球图片容器 -->
+        <div class="pokeball-container" id="pokeballContainer" style="display:none;">
+            <div class="pokeball-card">
+                <img src="myImages/Ball/1.png" alt="精灵球">
+                <div class="pokeball-description">
+                    项目介绍: 宝可梦图鉴/
+                    班级: 计科B20222/
+                    学号: 224081245/
+                    姓名: 蒲立华
+                </div>
+            </div>
+            <div class="pokeball-card">
+                <img src="myImages/Ball/2.png" alt="超级球">
+                <div class="pokeball-description">比精灵球稍好点的球</div>
+            </div>
+            <div class="pokeball-card">
+                <img src="myImages/Ball/3.png" alt="高级球">
+                <div class="pokeball-description">比超级球更好的精灵球</div>
+            </div>
+            <div class="pokeball-card">
+                <img src="myImages/Ball/4.png" alt="捕网球">
+                <div class="pokeball-description">捕捉水系\虫系好用的球</div>
+            </div>
+            <div class="pokeball-card">
+                <img src="myImages/Ball/5.png" alt="潜水球">
+                <div class="pokeball-description">能提高水中精灵的捕获度的特殊的球。</div>
+            </div>
+            <div class="pokeball-card">
+                <img src="myImages/Ball/6.png" alt="重复球">
+                <div class="pokeball-description">捕捉已经捕获过的精灵宝可梦会比较好用的球</div>
+            </div>
+            <div class="pokeball-card">
+                <img src="myImages/Ball/7.png" alt="豪华球">
+                <div class="pokeball-description">或叫做“亲密球”, 捕捉后精灵的亲密度上升会变快的球</div>
+            </div>
+            <div class="pokeball-card">
+                <img src="myImages/Ball/8.png" alt="纪念球">
+                <div class="pokeball-description">或叫做“珍惜球”, 某些版本买10个普通精灵球赠送一个的珍惜球，但捕捉率跟普通精灵球一样</div>
+            </div>
+            <div class="pokeball-card">
+                <img src="myImages/Ball/9.png" alt="快速球">
+                <div class="pokeball-description">战斗开始时就马上扔出去，会提高捕获度的特别的精灵球</div>
+            </div>
+            <div class="pokeball-card">
+                <img src="myImages/Ball/10.png" alt="计时球">
+                <div class="pokeball-description">回合数越长越容易捕获的球捕获度随时间变化</div>
+            </div>
+            <div class="pokeball-card">
+                <img src="myImages/Ball/11.png" alt="速度球">
+                <div class="pokeball-description">以“白色板栗”为材料, 提升战斗中易于逃跑的精灵的捕获度至×4</div>
+            </div>
+            <div class="pokeball-card">
+                <img src="myImages/Ball/12.png" alt="掌门球">
+                <div class="pokeball-description">又称大师球,投掷必定捕获（与人对战除外）!</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript函数：显示精灵球图片
+        function showPokeballs() {
+            const pokeballContainer = document.getElementById("pokeballContainer");
+            pokeballContainer.style.display = "grid";  // 显示精灵球图片容器
+        }
+    </script>
+</body>
+</html>

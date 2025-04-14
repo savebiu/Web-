@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>精灵</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* 页面样式 */
+        body {
+            background-image: url('myImages/6.png');  /* 背景图片 */
+            background-size: cover;  /* 背景图片覆盖整个页面 */
+            background-position: center;  /* 背景居中 */
+            background-repeat: no-repeat;  /* 背景不重复 */
+            margin: 0;  /* 去掉页面边距 */
+            padding: 0;  /* 去掉页面内边距 */
+            font-family: Arial, sans-serif;  /* 设置字体 */
+            height: 100vh;  /* 设置页面高度为视口高度 */
+        }
+
+        .content {
+            position: relative;
+            z-index: 1;
+            padding: 20px;
+            height: 100%;  /* 使内容区域充满屏幕 */
+            overflow-y: scroll; /* 使内容区域可以垂直滚动 */
+            padding-bottom: 10px; /* 给底部留一些空白，防止滚动条遮挡 */
+        }
+
+        h1 {
+           
+            color: rgb(243, 247, 8);  /* 设置标题颜色为白色 */
+            text-align: center;  /* 标题居中 */
+            font-size: 80px;  /* 设置标题字体大小 */
+        }
+
+        /* 精灵卡片容器样式 */
+        .pokemon-container {
+            display: grid;  /* 使用grid布局 */
+            justify-content: space-around;  /* 横向分布卡片 */
+            flex-wrap: wrap;  /* 允许卡片换行 */
+            margin-top: 20px;  /* 顶部外边距 */
+        }
+
+        /* 每个精灵卡片的样式 */
+        .pokemon-card {
+            width: 250px;  /* 卡片宽度增大 */
+            height: 350px;  /* 卡片高度增大 */
+            background-color: rgba(255, 255, 255, 0.7);  /* 背景色为半透明白色 */
+            border-radius: 20px;  /* 卡片圆角 */
+            padding: 20px;  /* 内边距 */
+            text-align: center;  /* 文字居中 */
+            margin: 15px;  /* 卡片间距增大 */
+        }
+
+        /* 精灵卡片中的图片样式 */
+        .pokemon-card img {
+            width: 100%;  /* 图片宽度占满卡片 */
+            height: 180px;  /* 增大图片高度 */
+            object-fit: cover;  /* 保持图片比例且填充 */
+            border-radius: 10px;  /* 圆角 */
+        }
+
+        /* 精灵卡片标题样式 */
+        .pokemon-card h3 {
+            margin-top: 15px;  /* 标题与图片之间的间距 */
+            color: #FF7E79;  /* 设置标题颜色 */
+        }
+
+        /* 精灵卡片中的文本样式 */
+        .pokemon-card p {
+            color: #333;  /* 设置文本颜色 */
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <h1>精灵图鉴</h1>
+
+        <!-- 精灵卡片容器 -->
+        <div class="pokemon-container">
+            <!-- 单个精灵卡片 -->
+            <div class="pokemon-card">
+                <img src="myImages/Pokemon/1.png" alt="皮卡丘">  <!-- 精灵图片 -->
+                <h3>雷系精灵</h3>  <!-- 精灵名称 -->
+                <p>等级：5</p>  <!-- 精灵等级 -->
+            </div>
+
+            <!-- 其他精灵卡片 -->
+            <div class="pokemon-card">
+                <img src="myImages/Pokemon/2.png" alt="梦幻">
+                <h3>超能系精灵</h3>
+                <p>等级：10</p>
+            </div>
+            <div class="pokemon-card">
+                <img src="myImages/Pokemon/3.png" alt="精灵3">
+                <h3>草系精灵</h3>
+                <p>等级：15</p>
+            </div>
+            <div class="pokemon-card">
+                <img src="myImages/Pokemon/4.png" alt="精灵3">
+                <h3>草系精灵</h3>
+                <p>等级：15</p>
+            </div>
+            <div class="pokemon-card">
+                <img src="myImages/Pokemon/5.png" alt="精灵3">
+                <h3>草系精灵</h3>
+                <p>等级：15</p>
+            </div>
+            <div class="pokemon-card">
+                <img src="myImages/Pokemon/6.png" alt="精灵3">
+                <h3>草系精灵</h3>
+                <p>等级：15</p>
+            </div>
+            <div class="pokemon-card">
+                <img src="myImages/Pokemon/7.png" alt="精灵3">
+                <h3>草系精灵</h3>
+                <p>等级：15</p>
+            </div>
+            <div class="pokemon-card">
+                <img src="myImages/Pokemon/8.png" alt="精灵3">
+                <h3>草系精灵</h3>
+                <p>等级：15</p>
+            </div>
+            <div class="pokemon-card">
+                <img src="myImages/Pokemon/9.png" alt="精灵3">
+                <h3>草系精灵</h3>
+                <p>等级：15</p>
+            </div>
+            <div class="pokemon-card">
+                <img src="myImages/Pokemon/10.png" alt="精灵3">
+                <h3>草系精灵</h3>
+                <p>等级：15</p>
+            </div>
+
+            <div class="pokemon-card">
+                <img src="myImages/Pokemon/11.png" alt="精灵3">
+                <h3>草系精灵</h3>
+                <p>等级：15</p>
+            </div>
+            
+        </div>
+
+        <!-- 动态生成的精灵卡片内容 -->
+        <main id="pokemonContainer">
+            <!-- 动态生成内容 -->
+        </main>
+
+    </div>    
+
+</body>
+</html>

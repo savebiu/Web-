@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>宝可梦图鉴</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        /* 设置页面背景 */
+        body {
+            background-image: url('myImages/6.png');
+            background-size: cover; /* 背景图片覆盖整个页面 */
+            background-position: center;
+            background-repeat: no-repeat;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        /* 为整个页面添加透明度 */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5); /* 黑色半透明层 */
+            z-index: -1; /* 确保它在内容下方 */
+        }
+
+        /* 页面内容容器 */
+        .content {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* 保证页面其他内容不受影响 */
+        .logo-title, .image-row, main {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* 导航栏样式 */
+        nav {
+            display: flex;
+            justify-content: center;
+            background: linear-gradient(90deg, #FF7E79, #FFB6C1); /* 渐变背景 */
+            padding: 10px 0;
+            font-size: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            border-radius: 20px;
+            margin: 0 0 20px 0;            
+            position: sticky; /* 确保层级生效 */
+            top: 0;
+            z-index: 1000; /* 提高层级 */
+            
+        }
+
+        /* 导航项 */
+        nav ul {
+            list-style-type: none;            
+            display: flex;
+            margin: 0;
+            padding: 0;
+            /* border-radius: 20px; */
+        }
+
+        nav ul li {
+            position: relative;
+            margin: 0 40px; /* 调整间距 */
+        }
+
+        /* 主导航项样式 */
+        nav ul li > a {
+            text-decoration: none;
+            color: #FFFFFF;
+            padding: 10px 20px;
+            display: block;
+            font-weight: bold;
+            text-align: center;
+            border-radius: 4px; /* 圆角 */
+        }
+
+        /* 鼠标悬停效果 */
+        nav ul li > a:hover {
+            background-color: rgba(255, 255, 255, 0.3); /* 半透明背景 */
+        }
+
+        /* 子菜单样式 */
+        nav ul li ul {
+            position: absolute;
+            top: 100%; /* 紧贴主菜单项下方 */
+            left: 0;
+            background-color: rgba(255, 255, 255, 0.9); /* 子菜单背景色 */
+            padding: 5px 0;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
+            border-radius: 4px;
+            display: none; /* 初始隐藏 */
+            min-width: 150px; /* 设置子菜单宽度 */
+            z-index: 1000; /* 提高层级 */
+        }
+
+        /* 子菜单项 */
+        nav ul li ul li {
+            text-align: left;
+        }
+
+        nav ul li ul li a {
+            padding: 10px;
+            display: block;
+            text-decoration: none;
+            color: #333; /* 子菜单文字颜色 */
+            font-size: 16px; /* 增大子菜单字体大小 */
+        }
+
+        nav ul li ul li a:hover {
+            background-color: #FF7E79; /* 悬停时高亮 */
+            color: #FFF;
+        }
+
+        /* 显示子菜单 */
+        nav ul li:hover ul {
+            display: block;
+        }
+
+        /* 搜索框样式 */
+        #search {
+            width: 600px; /* 增加搜索框宽度 */
+            height: 40px; /* 增加搜索框高度 */
+            padding: 10px 50px;
+            font-size: 20px;
+            border: 2px solid #FF7E79; /* 边框颜色 */
+            border-radius: 20px; /* 圆角 */
+            outline: none; /* 移除点击时的默认蓝色边框 */
+        }
+
+        #search::placeholder {
+            color: #aaa; /* 占位符颜色 */
+        }        
+
+        /* 图片轮播样式 */
+        .carousel {
+            width: 100%; /* 使轮播图宽度占满整个页面 */
+            height: auto;
+            overflow: hidden; /* 隐藏超出部分 */
+        }
+
+        .carousel img {
+            width: 100%; /* 图片占满容器 */
+            height: auto;
+            opacity: 0.8; /* 设置透明度 */
+        }
+                
+        /* 主内容区 */
+        main {
+            padding: 20px;
+            font-size: 20px;
+        }
+
+        /* 用于显示精灵详细信息的容器 */
+        #pokemonDetails {
+            display: none;
+            background-color: rgba(255, 255, 255, 0.8); /* 半透明背景 */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 600px;
+            width: 90%;
+            z-index: 9999;
+        }
+        
+        #pokemonDetails h3 {
+            margin-top: 0;
+        }
+
+        #pokemonDetails button {
+            background-color: #FF7E79;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        #pokemonDetails button:hover {
+            background-color: #FFB6C1;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">    
+        <header>
+          <img src="myImages/logo1.png" width="387" height="123" alt="logo" id="logo1">
+          <h1><img src="myImages/logo2.png" width="68" height="100" alt="logo"> 宝可梦图鉴</h1>
+
+            <h2>
+                <nav>
+                    <ul>
+                        <li>
+                            <a href="pokeBall.html">精灵球</a> <!-- 修改链接 -->
+                            <ul>
+                                <li><a href="pokeBall.html">精灵球</a></li>
+                                <li><a href="pokeBall.html">高级球</a></li>
+                                <li><a href="pokeBall.html">大师球</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="pokeMon.html">精灵</a>
+                            <ul>
+                                <li><a href="pokeMon.html">草系</a></li>
+                                <li><a href="pokeMon.html">火系</a></li>
+                                <li><a href="pokeMon.html">雷系</a></li>
+                                <li><a href="pokeMon.html">虫系</a></li>
+                                <li><a href="pokeMon.html">幽灵</a></li>
+                                <li><a href="pokeMon.html">妖精</a></li>
+                                <li><a href="pokeMon.html">龙</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </h2>
+            <input type="text" id="search" placeholder="搜索宝可梦...">
+        </header>
+
+        <div class="image-row">
+            <div class="grid-area">            
+            </div>       
+            <!-- 图片轮播 -->
+            <div class="carousel">
+                <img id="carouselImg" src="" alt="Image 1" style="width: 100%; height: 80; opacity: 0.8">
+            </div>     
+        </div>       
+
+        <!-- 预览图片区域 -->
+        <div id="imagePreview">
+            <img id="previewImg" src="" alt="Preview">
+        </div>
+
+        <main id="pokemonContainer" >
+            <!-- 动态生成内容 -->
+        </main>
+        <script>
+            // 图片路径数组
+            const imagePaths = [
+                'myImages/1.png',
+                'myImages/2.png',
+                'myImages/3.png',
+                'myImages/4.png',
+                'myImages/5.png',
+                'myImages/6.png',
+                'myImages/7.png',
+                'myImages/8.png'
+            ];
+        
+            // 获取两个图片元素
+            const img = document.getElementById('carouselImg');
+        
+            let currentIndex = 0; // 当前图片索引
+        
+            function changeImages() {
+                // 切换图片
+                currentIndex = (currentIndex + 1) % imagePaths.length; // 保证索引在数组范围内
+                img.src = imagePaths[currentIndex];
+            }
+        
+            // 每两秒切换一次图片
+            setInterval(changeImages, 2000);
+        </script>
+
+        <!-- 宝可梦详细信息弹窗 -->
+        <div id="pokemonDetails">
+            <h3 id="pokemonName">精灵名称</h3>
+            <img id="pokemonImage" src="" alt="Pokemon Image" width="100%">
+            <p id="pokemonDescription">这里是精灵的详细描述...</p>
+            <button id="closeDetails">关闭</button>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+
+</body>
+</html>
